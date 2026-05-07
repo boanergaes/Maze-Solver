@@ -141,6 +141,51 @@ class Maze:
         
         pygame.display.flip()
             
+    def generate(self, screen):
+        stack = []
+        
+        start_r = random.randint(0, self.rows - 1)
+        start_c = random.randint(0, self.cols - 1)
+        
+        self.visited[start_r][start_c] = True
+        
+        stack.append((start_r, start_c))
+        
+        while stack:
+            self.handle_events()
+            
+            current = stack[-1]
+
+            r, c = current
+            
+            neighbors = self.get_unvisited_neighbors(r, c)
+            
+            if neighbors:
+                nr, nc = random.choice(neighbors)
+                
+                self.remove_wall(r, c, nr, nc)
+                
+                self.visited[nr][nc] = True
+                
+                stack.append((nr, nc))
+                
+            else:
+                stack.pop()
+                
+            self.draw(screen, current=current)
+            
+            pygame.time.delay(20)
+         
+        # create random start/end   
+        self.start = (
+            random.randint(0, self.rows - 1),
+            0
+        )
+        
+        self.end = (
+            random.randint(0, self.rows - 1),
+            self.cols - 1
+        )
     
     # helpers
     
