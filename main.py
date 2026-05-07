@@ -32,6 +32,116 @@ class Maze:
         self.start = (0, 0)
         self.end = (rows - 1, cols - 1)
         
+    def draw(self, screen, current=None, solving=False):
+        screen.fill(WHITE)
+        
+        # draw dead ends
+        for r, c in self.dead_ends:
+            pygame.draw.rect(
+                screen,
+                BLUE,
+                (
+                    c * CELL_SIZE + 4,
+                    r * CELL_SIZE + 4,
+                    CELL_SIZE - 8,
+                    CELL_SIZE - 8
+                )
+            )
+        
+        # draw solution path
+        for r, c in self.solution_path:
+            pygame.draw.rect(
+                screen,
+                GREEN,
+                (
+                    c * CELL_SIZE + 6,
+                    r * CELL_SIZE + 6,
+                    CELL_SIZE - 12,
+                    CELL_SIZE - 12
+                )
+            )
+        
+        # draw current mouse position  
+        if current:
+            r, c = current
+            
+            pygame.draw.circle(
+                screen,
+                RED,
+                (
+                    c * CELL_SIZE + CELL_SIZE // 2,
+                    r * CELL_SIZE + CELL_SIZE // 2
+                ),
+                CELL_SIZE // 4
+            )
+        
+        # draw walls
+        for r in range(self.rows):
+            for c in range(self.cols):
+                x = c * CELL_SIZE
+                y = r * CELL_SIZE
+                
+                if self.north_wall[r][c]:
+                    pygame.draw.line(
+                        screen,
+                        BLACK,
+                        (x, y),
+                        (x + CELL_SIZE, y),
+                        2
+                    )
+                    
+                if self.east_wall[r][c]:
+                    pygame.draw.line(
+                        screen,
+                        BLACK,
+                        (x + CELL_SIZE, y),
+                        (x + CELL_SIZE, y + CELL_SIZE),
+                        2
+                    )
+        
+        # left border      
+        pygame.draw.line(
+            screen,
+            BLACK,
+            (0, 0),
+            (0, HEIGHT),
+            2
+        )
+        
+        # bottom border
+        pygame.draw.line(
+            screen,
+            BLACK,
+            (0, HEIGHT),
+            (WIDTH, HEIGHT),
+            2
+        )
+        
+        # openings
+        sr, sc = self.start
+        er, ec = self.end
+        
+        # start opening (left side)
+        pygame.draw.line(
+            screen,
+            WHITE,
+            (0, sr * CELL_SIZE + 2),
+            (0, sr * CELL_SIZE + CELL_SIZE - 2),
+            4
+        )
+        
+        # end openings (right side)
+        pygame.draw.line(
+            screen,
+            WHITE,
+            (WIDTH, er * CELL_SIZE + 2),
+            (WIDTH, er * CELL_SIZE + CELL_SIZE - 2),
+            4
+        )
+        
+        pygame.display.flip()
+            
+    
     # helpers
     
     def get_unvisited_neighbors(self, r, c):
