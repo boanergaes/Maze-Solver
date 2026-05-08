@@ -122,10 +122,6 @@ python3 main.py
 
 # Controls
 
-| Action | Description |
-|---|---|
-| Close Window | Exit program |
-
 * Close Window to Exit program
 
 ---
@@ -148,12 +144,16 @@ DFS produces more visually appealing mazes.
 
 # Screenshots
 
-![maze screen shot]('./assets/screen-shot1.jpg')
-![maze screen shot]('./assets/screen-shot2.jpg')
-![maze screen shot]('./assets/screen-shot3.jpg')
+![maze screen shot](./assets/screen-shot1.jpg)
+![maze screen shot](./assets/screen-shot2.jpg)
+![maze screen shot](./assets/screen-shot3.jpg)
 
 ---
 
 # Author
 
-Name: Zeamanuel Mebit    ID: UGR/9677/16   Sec: 2
+```
+Name: Zeamanuel Mebit    
+ID: UGR/9677/16   
+Sec: 2
+```
