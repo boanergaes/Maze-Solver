@@ -8,7 +8,7 @@ HEIGHT = ROWS * CELL_SIZE
 FPS = 60
 
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
+BLACK = (35, 35, 35)
 RED = (255, 0, 0)
 BLUE = (50, 100, 255)
 GREEN = (0, 255, 0)
