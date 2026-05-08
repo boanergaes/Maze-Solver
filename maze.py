@@ -7,8 +7,11 @@ class Maze:
     def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
+        
+        # use the instructed north_wall[r][c] and east_wall[r][c] data structure
         self.north_wall = [ [True]*cols for _ in range(rows) ]
         self.east_wall = [ [True]*cols for _ in range(rows) ]
+        
         self.visited = [ [False]*cols for _ in range(rows) ]
         self.solution_visited = [ [False]*cols for _ in range(rows) ]
         self.dead_ends = set()
@@ -126,6 +129,8 @@ class Maze:
         pygame.display.flip()
             
     def generate(self, screen):
+        print('generating maze...')
+        
         stack = []
         start_r = random.randint(0, self.rows - 1)
         start_c = random.randint(0, self.cols - 1)
@@ -155,6 +160,8 @@ class Maze:
         self.end = ( random.randint(0, self.rows - 1), self.cols - 1 )
         
     def solve(self, screen):
+        print('solving maze...')
+        
         stack = []
         sr, sc = self.start
         er, ec = self.end
@@ -241,6 +248,28 @@ class Maze:
                 neighbors.append((r + 1, c))
                 
         return neighbors
+    
+    def add_random_cycles(self, chance=20):
+        print('adding cycles...')
+        
+        for r in range(self.rows):
+            for c in range(self.cols):
+                if random.randint(1, chance) == 1:
+                    directions = []
+                    
+                    if c < self.cols - 1:
+                        directions.append("RIGHT")
+                    
+                    if r < self.rows - 1:
+                        directions.append("DOWN")
+                        
+                    if directions:
+                        d = random.choice(directions)
+                        
+                        if d == "RIGHT":
+                            self.east_wall[r][c] = False
+                        elif d == "DOWN":
+                            self.north_wall[r + 1][c] = False
                             
     def handle_events(self):
         for event in pygame.event.get():
