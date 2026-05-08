@@ -15,6 +15,7 @@ def main():
     # generate maze
     maze.generate(screen)
     
+    # add random cycles
     maze.add_random_cycles()
 
     pygame.time.delay(1000)

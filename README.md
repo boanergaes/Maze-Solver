@@ -142,6 +142,12 @@ DFS produces more visually appealing mazes.
 
 ---
 
+# Loom video
+
+[Loom video](./assets/Screencast%20from%202026-05-08%2004-30-59.webm)
+
+---
+
 # Screenshots
 
 ![maze screen shot](./assets/screen-shot1.jpg)
